@@ -26,7 +26,7 @@ exports.validIfExistUser = catchAsync(async (req, res, next) => {
     req.user = user;
     next();
 
-})
+});
 
 
 

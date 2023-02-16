@@ -5,6 +5,8 @@ const { userRouter } = require('../routes/user.routes');
 
 const { db } = require('../database/db');
 const { repairRouter } = require('../routes/repair.routes');
+const { authRouter } = require('../routes/auth.routes');
+
 const morgan = require('morgan');
 const globalErrorHandler = require('../controllers/error.controller');
 const AppError = require('../utils/appError');
@@ -21,6 +23,7 @@ class Server {
         this.paths = {
             users: '/api/v1/user',
             repairs: '/api/v1/repairs',
+            auth: '/api/v1/auth',
         }
 
         // INVOCAR AL METODO DE CONEXION DE BASE DE DATOS
@@ -57,8 +60,10 @@ class Server {
     routes() {
         // Utilizar las rutas de usuarios
         this.app.use(this.paths.users, userRouter);
-        // Utilizar las rutas de usuarios
+        // Utilizar las rutas de reparaciones
         this.app.use(this.paths.repairs, repairRouter);
+        // Utilizar las rutas de auth
+        this.app.use(this.paths.auth, authRouter);
 
 
         this.app.all('*', (req, res, next) => {

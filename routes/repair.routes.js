@@ -1,6 +1,7 @@
 // RUTAS : puntos de entrada de la aplicacion
 
 const { Router } = require("express");
+const { check } = require("express-validator");
 const { findAllRepairs, findRepair, createRepair, deleteRepair, updateRepair } = require("../controllers/repair.controller");
 const { validIfExistRepair } = require("../middlewares/repair.middlewares");
 const { validateFields } = require("../middlewares/validatefield.middlewares");
@@ -18,7 +19,6 @@ router.post('/', [
     check('description', 'The description must be mandatory').not().isEmpty(),
 
     validateFields,
-    validIfExistRepair,
 ], createRepair);
 
 router.patch('/:id', validIfExistRepair, updateRepair);

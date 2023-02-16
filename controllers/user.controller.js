@@ -41,32 +41,6 @@ exports.findUser = catchAsync(async (req, res) => {
 })
 
 
-// CREAR UN NUEVO USUARIO, SE DEBE PROPORCIONAR POR EL REQ.BODY (NAME, EMAIL, PASSWORD, ROLE), EL ROLE (ROL) PUEDE SER CLIENT O EMPLOYEE
-exports.createUser = catchAsync(async (req, res) => {
-
-    // OBTENER INFORMACION  DEL REQ BODY
-    const { name, email, password, role = 'user' } = req.body;
-
-    // CREAR UN NUEVO USUARIO
-    const newUser = await User.create({
-        name: name.toLowerCase(),
-        email: email.toLowerCase(),
-        password,
-        role,
-    });
-
-    // RESPUESTA DEL SERVIDOR
-    res.status(200).json({
-        status: 'success',
-        message: 'The user was created. ',
-
-        newUser,
-
-    });
-
-})
-
-
 // ACTUALIZAR LOS DATOS DE UN USUARIO DADO UN ID, SOLO PUEDE ACTUALIZAR SU NAME Y EMAIL
 exports.updateUser = catchAsync(async (req, res) => {
 
